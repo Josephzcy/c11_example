@@ -1,0 +1,31 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "../scripts/gcc_build.sh",
+      "options": {
+        "cwd": "/home/wingboy/workspace/os_study/assembling"
+      },
+      "problemMatcher": "$gcc",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+    },
+    {
+      "label": "build tda4",
+      "type": "shell",
+      "command": "./build_scripts_apa/single_build.sh tda4 release master gflags wheel_radius_calibration",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "options": {
+        "cwd": "/home/windboy/MyCode/aiplorer/scripts"
+      },
+      "problemMatcher": "$gcc"
+    }
+  ]
+}

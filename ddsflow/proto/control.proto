@@ -1,0 +1,16 @@
+syntax = "proto3";
+package minieye;
+
+// topic : "control"
+message Control {
+    bool control_flag = 1;              // true: 一段路径已经走完  false: 路径未完成
+    uint32 guide = 2;                    // driver Guidance Status, 0|default 1|backward 2|forward 3|stop
+    uint32 progress_bar = 3;             // progress bar For Each Path, 0~100
+    bool control_circle = 4;            // the control message circle, 0|1000ms 1|20ms
+    bool pla_vz_lw_soll = 5;            // steering_control_direction, 0|left  1|right
+    bool pla_lw_soll = 6;               // target_steering_angle, /degree
+    uint32 pla_status_pla_esp = 7;       // ESP status, 6|active
+    uint32 pla_status_pla_eps = 8;       // EPS status, 6|active
+    bool brake_req = 9;                 // brake require command, 0|no req 1|req to brake
+    float brake_cmd = 10;               // brake deceleration require command, 0~12,/s^2
+}

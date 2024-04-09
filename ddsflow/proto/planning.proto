@@ -1,0 +1,14 @@
+syntax = "proto3";
+package minieye;
+
+message Path {
+    uint32 move_direct = 1; // 0|inviad 1|backward 2|forward
+    float turn_radius = 2;
+    float move_distance = 3;
+}
+
+// topic : "planning"
+message Planning {
+    uint32 planning_status = 1;  //Planning Status, 0|defalt, 1|search spots, 2|waiting control, 3|has planing path, 4|replanning, 5|finish planing
+    repeated Path planning_path = 2;
+}

@@ -1,0 +1,15 @@
+{
+  "log_level": 1,
+  "topics": [
+    {
+      "topic": "camera_id",
+      "dds_mode": "shm",
+      "data_refresh_rate": 20,
+      "role": "producer",
+      "message_type": 0,
+      "buff_num": 10,
+      "local_cache_num": 2,
+      "elem_max_size": 1000000
+    }
+  ]
+}

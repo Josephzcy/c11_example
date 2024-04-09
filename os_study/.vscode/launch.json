@@ -1,0 +1,35 @@
+{
+  // 使用 IntelliSense 了解相关属性。 
+  // 悬停以查看现有属性的描述。
+  // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+
+      {
+          "name": "wheel_radius_calib_debug",  // 该调试任务的名字，启动调试时会在待选列表中显示
+          "type": "cppdbg",
+          "request": "launch",
+        //   "program": "/home/windboy/MyCode/aiplorer/aipilot/services/wheel_radius_calibration/build/linux/bin/wheel_radius_calibration",
+        //   "args": ["-c/home/windboy/MyCode/aiplorer/aipilot/services/wheel_radius_calibration/config/wheel_calib.yaml"],
+          
+        "program": "/home/windboy/MyCode/aiplorer/aipilot/services/wheel_radius_calibration/build/linux/bin/log_replay_node",
+        
+        
+        "stopAtEntry": false,  // 这一项控制是否在入口处暂停，默认false不暂停，改为true暂停
+          "cwd": "${workspaceFolder}",
+          "environment": [
+              {"name": "LD_LIBRARY_PATH",
+              "value": "$LD_LIBRARY_PATH:./build/linux/runtime:./build/linux/lib"}
+          ],
+          "externalConsole": false,  // 这一项控制是否启动外部控制台（独立的黑框）运行程序，默认false表示在集成终端中运行
+          "MIMode": "gdb",
+          "setupCommands": [
+              {
+                  "description": "enable gdb pretty printing",
+                  "text": "-enable-pretty-printing",
+                  "ignoreFailures": true
+              }
+          ]
+      }
+  ]
+}

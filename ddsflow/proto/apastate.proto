@@ -1,0 +1,15 @@
+syntax = "proto3";
+import "parkingspace.proto";
+package minieye;
+
+// topic : "apastate"
+message ApaState {
+   enum status {
+       kUnknown = 0;
+       kSearching = 1;    // 搜索车位
+       kParking = 2;      // 泊车中
+       kCompleted = 3;    // 泊车完成
+   }
+   int32 park_state = 1;      // 泊车状态
+   perception.ParkingSlot choosed_parking_slot = 2;   // 泊车状态中，选择的车位信息
+}

@@ -1,0 +1,59 @@
+syntax = "proto3";
+import "google/protobuf/any.proto";
+package minieye;
+
+// topic : "vehicle_signal"
+// breif : 周期性信号
+message VehicleSignal {
+	enum SignalType {
+		kInvalid = 0;
+		kSteeringWheelAngle = 1;  	// 方向盘转角 (°)
+		kSteeringWheelDirect = 2; 	// 方向盘方向 0：右边 1： 左边
+		kLenkmoment = 3;          	//
+		kLenkmomentQbit = 4;      	//
+		kWheelSpeedFl = 5;          // 左前轮轮速脉冲计数
+		kWheelSpeedFlDirect = 6;    // 左前轮轮速脉冲计数方向
+		kWheelSpeedFr = 7;          // 右前轮轮速脉冲计数
+		kWheelSpeedFrDirect = 8;    // 右前轮轮速脉冲计数方向
+		kWheelSpeedRl = 9; 			// 左后轮轮速脉冲计数
+		kWheelSpeedRlDirect = 10;   // 左后轮轮速脉冲计数方向
+		kWheelSpeedRr = 11;         // 右后轮轮速脉冲计数
+		kWheelSpeedRrDirect = 12;   // 右后轮轮速脉冲计数方向
+		kTargetGear = 13;           // 档位（0: 无效， 5：P, 6: R, 7:N, 8:D, 9:S）
+		kShortDisRadarFl = 14;      // 前左短距离雷达（UPA）探测距离(cm)
+		kShortDisRadarFlm = 15;     // 前左中短距离雷达探测距离
+		kShortDisRadarFrm = 16;     // 前右中短距离雷达探测距离
+		kShortDisRadarFr = 17;      // 前右短距离雷达探测距离
+		kShortDisRadarBl = 18;      // 后左短距离雷达（UPA）探测距离
+		kShortDisRadarBlm = 19;     // 后左中短距离雷达探测距离
+		kShortDisRadarBrm = 20;     // 后右中短距离雷达探测距离
+		kShortDisRadarBr = 21;      // 后右短距离雷达探测距离
+		kLongDisRadarFl = 22;       // 左前长距离雷达（APA）探测距离(cm)
+		kLongDisRadarFr = 23;       // 右前长距离雷达探测距离
+		kLongDisRadarBl = 24;       // 左后长距离雷达探测距离
+		kLongDisRadarBr = 25;       // 右后长距离雷达探测距离
+		kWheelSpeed2Fl = 26;        // 左前轮轮速（m/s)
+		kWheelSpeed2Fr = 27;        // 右前轮轮速（m/s)
+		kWheelSpeed2Rl = 28;        // 左后轮轮速（m/s)
+		kWheelSpeed2Rr = 29;        // 右后轮轮速（m/s）
+		kGierrate = 30;             // YawRate
+		kGierrateDirect = 31;       // YawRate 方向
+		kLongitudinalAc = 32;       // 纵向加速度
+		kLaterallyAc = 33;          // 横向加速度
+		kPlaStatus = 34;
+		kPlaResp = 35;
+		kCanSpeed = 36;            	// 车速 (m/s)
+	}
+	uint64 signal_tm = 1;			// 信号时间戳
+	map<int32, float> signals = 2;      // pair : <SignalType, value> 车身信号
+}
+
+// topic : "command_signal"
+// brief : 触发式信号
+message CommandSignal {
+	enum SignalType {
+		kUnknown = 0;                             // 无意义
+	}
+	SignalType signal = 1;                        // 信号类别 
+	google.protobuf.Any details = 2;              // 信号详细信息
+}

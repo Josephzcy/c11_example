@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package minieye;
+
+message SyncDisplay {
+	uint64 frame_id = 1;                            // 帧号
+}

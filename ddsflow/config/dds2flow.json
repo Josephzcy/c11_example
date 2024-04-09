@@ -1,0 +1,26 @@
+{
+  "log_level": 1,
+  "topics": [
+    {
+      "topic": "apa_odometry",
+      "dds_mode": "shm",
+      "buff_num": 10,
+      "elem_max_size": 80000
+    }, 
+    {
+      "topic": "vehicle_signal",
+      "dds_mode": "shm",
+      "buff_num": 100,
+      "elem_max_size": 1000
+    },    
+    {
+      "topic": "parkingspace",
+      "dds_mode": "shm",
+      "buff_num": 10,
+      "elem_max_size": 1000
+    }
+
+  ],
+  "flow_addr": "192.168.98.233",
+  "flow_port": 24012
+}

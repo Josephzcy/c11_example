@@ -1,0 +1,49 @@
+SET(INPUT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+SET(PROTOC ${CONAN_PROTOBUF_ROOT}/bin/protoc)
+SET(PROTOC_C_OUT_FLAG --cpp_out)
+
+SET(PROTO_INPUT
+	"apastate.proto"
+	"vehicle_signal.proto"
+    "camera.proto"
+	"parkingspace.proto"
+    "segmentation.proto"
+    "display.proto"
+    "control.proto"
+    "planning.proto"
+    )
+#MESSAGE(STATUS ${PROTO_INPUT})
+MESSAGE(STATUS ${CMAKE_CURRENT_SOURCE_DIR})
+
+
+FOREACH (PROTO_FILE ${PROTO_INPUT})
+    GET_FILENAME_COMPONENT(PROTO_NAME ${PROTO_FILE} NAME_WE)
+    SET(CUR_PROTO_GEN
+        ${CMAKE_CURRENT_SOURCE_DIR}/${PROTO_NAME}.pb.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/${PROTO_NAME}.pb.cc
+    )
+    SET(PROTO_GEN
+        ${PROTO_GEN}
+        ${CUR_PROTO_GEN}
+    )
+	LIST(APPEND SRC_LIST ${CUR_PROTO_GEN})
+
+#MESSAGE(STATUS "CUR_PROTO_GEN = ${CUR_PROTO_GEN}")
+    # IF (WITH_LINUX_PC)
+    # ADD_CUSTOM_COMMAND(
+    #     OUTPUT ${CUR_PROTO_GEN}
+    #     COMMAND ${PROTOC} ${PROTO_FILE} ${PROTOC_C_OUT_FLAG} ${CMAKE_CURRENT_SOURCE_DIR} -I${INPUT_DIR}
+    #     DEPENDS ${PROTOC} ${PROTO_FILE}
+    #     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    # )
+    # ENDIF()
+ENDFOREACH(PROTO_FILE ${PROTO_INPUT})
+
+MESSAGE(STATUS ${SRC_LIST})
+
+# 生成*.h *.cpp文件
+IF(BUILD_SHARED_LIBS)
+	ADD_LIBRARY(dds_proto SHARED ${SRC_LIST})
+ELSE()
+	ADD_LIBRARY(dds_proto STATIC ${SRC_LIST})
+ENDIF()
